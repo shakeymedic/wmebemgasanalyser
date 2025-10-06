@@ -129,6 +129,22 @@
             opacity: 1;
             transform: translateY(0);
         }
+        
+        /* Tab Styles */
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            color: #475569; /* slate-600 */
+            border-bottom: 3px solid transparent;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+        .tab-btn:hover {
+            color: #0f172a; /* slate-900 */
+        }
+        .active-tab {
+            color: #0f172a; /* slate-900 */
+            border-bottom-color: #f59e0b; /* amber-500 */
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -152,226 +168,321 @@
             </nav>
         </div>
     </header>
+    
+    <!-- Tab Navigation -->
+    <div class="bg-slate-100 border-b border-slate-200 sticky top-[84px] z-40">
+        <div class="container mx-auto px-6 flex items-center space-x-1">
+            <button id="infographic-tab" class="tab-btn active-tab">Infographic Guide</button>
+            <button id="deep-dive-tab" class="tab-btn">Deep Dive</button>
+        </div>
+    </div>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-6 py-12 md:py-16">
 
-        <!-- Section 1: Introduction -->
-        <section id="introduction" class="mb-20 fade-in-up">
-            <div class="text-center">
-                <h2 class="section-title">The Clinical Imperative of Blood Gas Analysis</h2>
-                <p class="section-subtitle mt-4 max-w-3xl mx-auto">
-                    One of the most vital diagnostic tests in acute medicine, providing a rapid, quantitative assessment of a patient's respiratory and metabolic status to guide life-saving interventions.
-                </p>
-            </div>
-            <div class="mt-12 grid md:grid-cols-2 gap-8 items-center">
-                <div class="card p-8">
-                    <h3 class="text-xl font-bold text-slate-800 mb-3">Acid-Base Homeostasis</h3>
-                    <p class="text-slate-600">The body maintains a delicate pH balance (7.35-7.45) for optimal enzyme function. This is managed by the coordinated action of the respiratory system (regulating CO₂) and the renal system (regulating HCO₃⁻).</p>
+    <!-- Main Content: Infographic -->
+    <div id="infographic-content">
+        <main class="container mx-auto px-6 py-12 md:py-16">
+            <!-- Section 1: Introduction -->
+            <section id="introduction" class="mb-20 fade-in-up">
+                <div class="text-center">
+                    <h2 class="section-title">The Clinical Imperative of Blood Gas Analysis</h2>
+                    <p class="section-subtitle mt-4 max-w-3xl mx-auto">
+                        One of the most vital diagnostic tests in acute medicine, providing a rapid, quantitative assessment of a patient's respiratory and metabolic status to guide life-saving interventions.
+                    </p>
                 </div>
-                <div class="card p-8 bg-slate-800 text-white">
-                    <h3 class="text-xl font-bold mb-3">The Henderson-Hasselbalch Equation</h3>
-                    <p class="text-slate-300">This equation is the cornerstone of acid-base interpretation. Modern analysers directly measure pH and pCO₂, then use this relationship to calculate bicarbonate.</p>
-                    <div class="mt-4 text-center p-4 bg-slate-900 rounded-lg font-mono text-amber-400 text-sm md:text-base">
-                        pH = 6.1 + log ( [HCO₃⁻] / (0.03 * pCO₂) )
+                <div class="mt-12 grid md:grid-cols-2 gap-8 items-center">
+                    <div class="card p-8">
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">Acid-Base Homeostasis</h3>
+                        <p class="text-slate-600">The body maintains a delicate pH balance (7.35-7.45) for optimal enzyme function. This is managed by the coordinated action of the respiratory system (regulating CO₂) and the renal system (regulating HCO₃⁻).</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 2: Key Parameters Measured -->
-        <section id="parameters" class="mb-20 fade-in-up">
-            <div class="text-center mb-12">
-                <h2 class="section-title">From Blood Gas to Critical Care Panel</h2>
-                <p class="section-subtitle mt-4 max-w-3xl mx-auto">
-                    Modern machines have evolved to measure a wide array of electrolytes, metabolites, and haemoglobin fractions from a single small sample.
-                </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Acid-Base Status -->
-                <div class="card p-6 param-card param-acid-base">
-                    <h3 class="text-lg font-bold text-blue-600 mb-2">Acid-Base Status</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><strong>pH:</strong> 7.35 - 7.45 (Overall acidity)</li>
-                        <li><strong>pCO₂:</strong> 4.7-6.0 kPa (Respiratory component)</li>
-                        <li><strong>HCO₃⁻ (calc):</strong> 22-26 mmol/L (Metabolic component)</li>
-                        <li><strong>Base Excess:</strong> -2 to +2 mmol/L (Overall metabolic status)</li>
-                    </ul>
-                </div>
-                <!-- Oxygenation Status -->
-                <div class="card p-6 param-card param-oxygenation">
-                    <h3 class="text-lg font-bold text-red-600 mb-2">Oxygenation Status</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><strong>pO₂:</strong> 11-14 kPa (Oxygen dissolved in plasma)</li>
-                        <li><strong>sO₂:</strong> 95-99% (Haemoglobin O₂ saturation)</li>
-                    </ul>
-                </div>
-                <!-- Haemoglobin (Co-oximetry) -->
-                <div class="card p-6 param-card param-haemoglobin">
-                    <h3 class="text-lg font-bold text-violet-600 mb-2">Haemoglobin (Co-oximetry)</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><strong>tHb:</strong> Total Haemoglobin</li>
-                        <li><strong>FCOHb:</strong> Carboxyhaemoglobin (CO poisoning)</li>
-                        <li><strong>FMetHb:</strong> Methaemoglobin (impaired O₂ binding)</li>
-                    </ul>
-                </div>
-                <!-- Electrolytes -->
-                <div class="card p-6 param-card param-electrolyte">
-                    <h3 class="text-lg font-bold text-emerald-600 mb-2">Electrolytes</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><strong>Na⁺:</strong> 135-145 mmol/L (Fluid balance)</li>
-                        <li><strong>K⁺:</strong> 3.5-5.0 mmol/L (Cardiac function)</li>
-                        <li><strong>Ca²⁺ (ionised):</strong> 1.15-1.35 mmol/L (Active form)</li>
-                        <li><strong>Cl⁻:</strong> 98-107 mmol/L (Acid-base balance)</li>
-                    </ul>
-                </div>
-                <!-- Metabolites -->
-                <div class="card p-6 param-card param-metabolite">
-                    <h3 class="text-lg font-bold text-orange-600 mb-2">Metabolites</h3>
-                     <ul class="space-y-2 text-sm">
-                        <li><strong>Glucose:</strong> 4.0-7.8 mmol/L (Blood sugar)</li>
-                        <li><strong>Lactate:</strong> 0.5-2.2 mmol/L (Tissue hypoxia marker)</li>
-                    </ul>
-                </div>
-                 <!-- Machine Brands -->
-                <div class="card p-6 border-l-4 border-slate-400">
-                    <h3 class="text-lg font-bold text-slate-600 mb-2">Common UK Analysers</h3>
-                     <p class="text-sm text-slate-500">You'll frequently encounter systems from <span class="font-semibold">Radiometer</span> (ABL series), <span class="font-semibold">Werfen</span> (GEM series), and <span class="font-semibold">Siemens</span> (RAPIDPoint) in NHS hospitals.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 3: Clinical Applications in the ED -->
-        <section id="applications" class="mb-20 fade-in-up">
-            <div class="text-center mb-12">
-                <h2 class="section-title">Clinical Applications in the ED</h2>
-                <p class="section-subtitle mt-4 max-w-3xl mx-auto">
-                    The rapid, comprehensive panel from a blood gas analyser is indispensable for diagnosing and managing a vast array of critical conditions.
-                </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="card p-6">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Respiratory Disorders</h3>
-                    <p class="text-sm text-slate-600">The definitive test for assessing oxygenation and ventilation in conditions like <strong>ARDS, COPD, asthma, and pulmonary embolism</strong>. It's the gold standard for titrating respiratory support (e.g., NIV, mechanical ventilation).</p>
-                </div>
-                <div class="card p-6">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Metabolic & Endocrine Crises</h3>
-                    <p class="text-sm text-slate-600">Essential for diagnosing and managing <strong>Diabetic Ketoacidosis (DKA)</strong>, revealing the severity of metabolic acidosis and guiding insulin/fluid therapy. Also crucial for identifying severe renal failure and other metabolic derangements.</p>
-                </div>
-                <div class="card p-6">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Circulatory Shock & Sepsis</h3>
-                    <p class="text-sm text-slate-600"><strong>Lactate measurement is vital</strong> for identifying tissue hypoperfusion in sepsis, septic shock, and hypovolemic shock. Serial measurements are key to guiding resuscitation efforts and assessing response to treatment.</p>
-                </div>
-                <div class="card p-6">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Toxicology</h3>
-                    <p class="text-sm text-slate-600"><strong>Co-oximetry is the only way to diagnose Carbon Monoxide poisoning</strong> by measuring FCOHb. The test also helps manage overdoses that cause respiratory depression or metabolic acidosis (e.g., salicylates, ethylene glycol).</p>
-                </div>
-                <div class="card p-6">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Cardiac Emergencies</h3>
-                    <p class="text-sm text-slate-600">Used in <strong>cardiac arrest</strong> to identify and potentially correct underlying causes like severe acidosis or life-threatening hyperkalaemia. Helps guide management in acute heart failure with respiratory compromise.</p>
-                </div>
-                 <div class="card p-6">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Electrolyte Emergencies</h3>
-                    <p class="text-sm text-slate-600">Provides rapid results for life-threatening electrolyte disturbances, especially <strong>hyperkalaemia</strong> and abnormalities in ionised calcium, allowing for immediate intervention.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 4: Core Measurement Technologies -->
-        <section id="technology" class="mb-20 fade-in-up">
-            <div class="text-center mb-12">
-                <h2 class="section-title">How It Works: The Sensor Technologies</h2>
-                <p class="section-subtitle mt-4 max-w-3xl mx-auto">
-                    Blood gas analysers integrate three distinct physics-based measurement principles into a single microfluidic device. Click on each card to learn more.
-                </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Potentiometry Card -->
-                <div id="potentiometry-card" class="card tech-card p-6 text-white bg-slate-800" onclick="openModal('potentiometry-modal')">
-                    <div class="overlay"></div>
-                    <div class="relative z-10 flex flex-col h-full">
-                        <div class="tech-icon">
-                           <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l-3-1m-3 1l-6 18M12 4v16" /></svg>
-                        </div>
-                        <div class="mt-auto">
-                            <h3 class="text-2xl font-bold">Potentiometry</h3>
-                            <p class="mt-2 text-slate-300">Measures voltage to determine ion concentration. Used for pH, pCO₂, Na⁺, K⁺, Ca²⁺, Cl⁻.</p>
+                    <div class="card p-8 bg-slate-800 text-white">
+                        <h3 class="text-xl font-bold mb-3">The Henderson-Hasselbalch Equation</h3>
+                        <p class="text-slate-300">This equation is the cornerstone of acid-base interpretation. Modern analysers directly measure pH and pCO₂, then use this relationship to calculate bicarbonate.</p>
+                        <div class="mt-4 text-center p-4 bg-slate-900 rounded-lg font-mono text-amber-400 text-sm md:text-base">
+                            pH = 6.1 + log ( [HCO₃⁻] / (0.03 * pCO₂) )
                         </div>
                     </div>
                 </div>
-                <!-- Amperometry Card -->
-                <div id="amperometry-card" class="card tech-card p-6 text-white bg-slate-800" onclick="openModal('amperometry-modal')">
-                    <div class="overlay"></div>
-                    <div class="relative z-10 flex flex-col h-full">
-                         <div class="tech-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                        </div>
-                         <div class="mt-auto">
-                            <h3 class="text-2xl font-bold">Amperometry</h3>
-                            <p class="mt-2 text-slate-300">Measures current from a chemical reaction. Used for pO₂, Glucose, Lactate.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Spectrophotometry Card -->
-                <div id="spectrophotometry-card" class="card tech-card p-6 text-white bg-slate-800" onclick="openModal('spectrophotometry-modal')">
-                    <div class="overlay"></div>
-                     <div class="relative z-10 flex flex-col h-full">
-                         <div class="tech-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
-                        </div>
-                         <div class="mt-auto">
-                            <h3 class="text-2xl font-bold">Spectrophotometry</h3>
-                            <p class="mt-2 text-slate-300">(Co-oximetry) Measures light absorbance to differentiate haemoglobin species.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Section 5: Pre-Analytical Pitfalls -->
-        <section id="pitfalls" class="fade-in-up">
-            <div class="text-center mb-12">
-                <h2 class="section-title">Pre-Analytical Pitfalls: Get it Right First Time</h2>
-                <p class="section-subtitle mt-4 max-w-3xl mx-auto">
-                    The accuracy of blood gas analysis is uniquely vulnerable to errors during sample collection and handling. A bad sample gives a bad result.
-                </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-                <div class="card p-6 border-t-4 border-red-500">
-                    <div class="flex items-center mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /></svg>
-                        <h3 class="text-lg font-bold text-slate-800">Air Bubbles (Anaerobic Sample)</h3>
-                    </div>
-                    <p class="text-sm text-slate-600">Exposure to room air (high pO₂, low pCO₂) will cause O₂ to diffuse in and CO₂ to diffuse out. Expel all bubbles immediately.</p>
-                    <p class="mt-2 text-sm font-semibold text-red-600">Result: Falsely low pCO₂, high pH, high pO₂.</p>
+            <!-- Section 2: Key Parameters Measured -->
+            <section id="parameters" class="mb-20 fade-in-up">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">From Blood Gas to Critical Care Panel</h2>
+                    <p class="section-subtitle mt-4 max-w-3xl mx-auto">
+                        Modern machines have evolved to measure a wide array of electrolytes, metabolites, and haemoglobin fractions from a single small sample.
+                    </p>
                 </div>
-                <div class="card p-6 border-t-4 border-amber-500">
-                    <div class="flex items-center mb-3">
-                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        <h3 class="text-lg font-bold text-slate-800">Delay in Analysis</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Cards from previous version -->
+                     <div class="card p-6 param-card param-acid-base">
+                        <h3 class="text-lg font-bold text-blue-600 mb-2">Acid-Base Status</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><strong>pH:</strong> 7.35 - 7.45 (Overall acidity)</li>
+                            <li><strong>pCO₂:</strong> 4.7-6.0 kPa (Respiratory component)</li>
+                            <li><strong>HCO₃⁻ (calc):</strong> 22-26 mmol/L (Metabolic component)</li>
+                            <li><strong>Base Excess:</strong> -2 to +2 mmol/L (Overall metabolic status)</li>
+                        </ul>
                     </div>
-                    <p class="text-sm text-slate-600">Ongoing cellular metabolism consumes O₂ and produces CO₂/acids. Analyse immediately or transport on ice if delayed.</p>
-                    <p class="mt-2 text-sm font-semibold text-amber-600">Result: Falsely low pO₂, high pCO₂, low pH.</p>
-                </div>
-                <div class="card p-6 border-t-4 border-blue-500">
-                    <div class="flex items-center mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" /></svg>
-                        <h3 class="text-lg font-bold text-slate-800">Haemolysis</h3>
+                    <div class="card p-6 param-card param-oxygenation">
+                        <h3 class="text-lg font-bold text-red-600 mb-2">Oxygenation Status</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><strong>pO₂:</strong> 11-14 kPa (Oxygen dissolved in plasma)</li>
+                            <li><strong>sO₂:</strong> 95-99% (Haemoglobin O₂ saturation)</li>
+                        </ul>
                     </div>
-                    <p class="text-sm text-slate-600">Rupture of red blood cells (e.g., from vigorous shaking or difficult draw) releases intracellular components.</p>
-                    <p class="mt-2 text-sm font-semibold text-blue-600">Result: Falsely high K⁺ (most common), but also affects AST, ALT, LDH.</p>
-                </div>
-                <div class="card p-6 border-t-4 border-purple-500">
-                    <div class="flex items-center mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
-                        <h3 class="text-lg font-bold text-slate-800">Excess Heparin (Dilution)</h3>
+                    <div class="card p-6 param-card param-haemoglobin">
+                        <h3 class="text-lg font-bold text-violet-600 mb-2">Haemoglobin (Co-oximetry)</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><strong>tHb:</strong> Total Haemoglobin</li>
+                            <li><strong>FCOHb:</strong> Carboxyhaemoglobin (CO poisoning)</li>
+                            <li><strong>FMetHb:</strong> Methaemoglobin (impaired O₂ binding)</li>
+                        </ul>
                     </div>
-                    <p class="text-sm text-slate-600">Using too much liquid heparin, or not filling the syringe to the correct volume, dilutes the entire sample.</p>
-                    <p class="mt-2 text-sm font-semibold text-purple-600">Result: Falsely low values for all measured parameters (pCO₂, electrolytes, Hb).</p>
+                    <div class="card p-6 param-card param-electrolyte">
+                        <h3 class="text-lg font-bold text-emerald-600 mb-2">Electrolytes</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><strong>Na⁺:</strong> 135-145 mmol/L (Fluid balance)</li>
+                            <li><strong>K⁺:</strong> 3.5-5.0 mmol/L (Cardiac function)</li>
+                            <li><strong>Ca²⁺ (ionised):</strong> 1.15-1.35 mmol/L (Active form)</li>
+                            <li><strong>Cl⁻:</strong> 98-107 mmol/L (Acid-base balance)</li>
+                        </ul>
+                    </div>
+                    <div class="card p-6 param-card param-metabolite">
+                        <h3 class="text-lg font-bold text-orange-600 mb-2">Metabolites</h3>
+                         <ul class="space-y-2 text-sm">
+                            <li><strong>Glucose:</strong> 4.0-7.8 mmol/L (Blood sugar)</li>
+                            <li><strong>Lactate:</strong> 0.5-2.2 mmol/L (Tissue hypoxia marker)</li>
+                        </ul>
+                    </div>
+                    <div class="card p-6 border-l-4 border-slate-400">
+                        <h3 class="text-lg font-bold text-slate-600 mb-2">Common UK Analysers</h3>
+                         <p class="text-sm text-slate-500">You'll frequently encounter systems from <span class="font-semibold">Radiometer</span> (ABL series), <span class="font-semibold">Werfen</span> (GEM series), and <span class="font-semibold">Siemens</span> (RAPIDPoint) in NHS hospitals.</p>
+                    </div>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
+
+            <!-- Section 3: Clinical Applications in the ED -->
+            <section id="applications" class="mb-20 fade-in-up">
+                 <div class="text-center mb-12">
+                    <h2 class="section-title">Clinical Applications in the ED</h2>
+                    <p class="section-subtitle mt-4 max-w-3xl mx-auto">
+                        The rapid, comprehensive panel from a blood gas analyser is indispensable for diagnosing and managing a vast array of critical conditions.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card p-6">
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Respiratory Disorders</h3>
+                        <p class="text-sm text-slate-600">The definitive test for assessing oxygenation and ventilation in conditions like <strong>ARDS, COPD, asthma, and pulmonary embolism</strong>. It's the gold standard for titrating respiratory support (e.g., NIV, mechanical ventilation).</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Metabolic & Endocrine Crises</h3>
+                        <p class="text-sm text-slate-600">Essential for diagnosing and managing <strong>Diabetic Ketoacidosis (DKA)</strong>, revealing the severity of metabolic acidosis and guiding insulin/fluid therapy. Also crucial for identifying severe renal failure and other metabolic derangements.</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Circulatory Shock & Sepsis</h3>
+                        <p class="text-sm text-slate-600"><strong>Lactate measurement is vital</strong> for identifying tissue hypoperfusion in sepsis, septic shock, and hypovolemic shock. Serial measurements are key to guiding resuscitation efforts and assessing response to treatment.</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Toxicology</h3>
+                        <p class="text-sm text-slate-600"><strong>Co-oximetry is the only way to diagnose Carbon Monoxide poisoning</strong> by measuring FCOHb. The test also helps manage overdoses that cause respiratory depression or metabolic acidosis (e.g., salicylates, ethylene glycol).</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Cardiac Emergencies</h3>
+                        <p class="text-sm text-slate-600">Used in <strong>cardiac arrest</strong> to identify and potentially correct underlying causes like severe acidosis or life-threatening hyperkalaemia. Helps guide management in acute heart failure with respiratory compromise.</p>
+                    </div>
+                     <div class="card p-6">
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Electrolyte Emergencies</h3>
+                        <p class="text-sm text-slate-600">Provides rapid results for life-threatening electrolyte disturbances, especially <strong>hyperkalaemia</strong> and abnormalities in ionised calcium, allowing for immediate intervention.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Core Measurement Technologies -->
+            <section id="technology" class="mb-20 fade-in-up">
+                <!-- content from previous version -->
+                <div class="text-center mb-12">
+                    <h2 class="section-title">How It Works: The Sensor Technologies</h2>
+                    <p class="section-subtitle mt-4 max-w-3xl mx-auto">
+                        Blood gas analysers integrate three distinct physics-based measurement principles into a single microfluidic device. Click on each card to learn more.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div id="potentiometry-card" class="card tech-card p-6 text-white bg-slate-800" onclick="openModal('potentiometry-modal')">
+                        <div class="overlay"></div>
+                        <div class="relative z-10 flex flex-col h-full">
+                            <div class="tech-icon">
+                               <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l-3-1m-3 1l-6 18M12 4v16" /></svg>
+                            </div>
+                            <div class="mt-auto">
+                                <h3 class="text-2xl font-bold">Potentiometry</h3>
+                                <p class="mt-2 text-slate-300">Measures voltage to determine ion concentration. Used for pH, pCO₂, Na⁺, K⁺, Ca²⁺, Cl⁻.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="amperometry-card" class="card tech-card p-6 text-white bg-slate-800" onclick="openModal('amperometry-modal')">
+                        <div class="overlay"></div>
+                        <div class="relative z-10 flex flex-col h-full">
+                             <div class="tech-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                            </div>
+                             <div class="mt-auto">
+                                <h3 class="text-2xl font-bold">Amperometry</h3>
+                                <p class="mt-2 text-slate-300">Measures current from a chemical reaction. Used for pO₂, Glucose, Lactate.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="spectrophotometry-card" class="card tech-card p-6 text-white bg-slate-800" onclick="openModal('spectrophotometry-modal')">
+                        <div class="overlay"></div>
+                         <div class="relative z-10 flex flex-col h-full">
+                             <div class="tech-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                            </div>
+                             <div class="mt-auto">
+                                <h3 class="text-2xl font-bold">Spectrophotometry</h3>
+                                <p class="mt-2 text-slate-300">(Co-oximetry) Measures light absorbance to differentiate haemoglobin species.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Pre-Analytical Pitfalls -->
+            <section id="pitfalls" class="fade-in-up">
+                 <div class="text-center mb-12">
+                    <h2 class="section-title">Pre-Analytical Pitfalls: Get it Right First Time</h2>
+                    <p class="section-subtitle mt-4 max-w-3xl mx-auto">
+                        The accuracy of blood gas analysis is uniquely vulnerable to errors during sample collection and handling. A bad sample gives a bad result.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                    <div class="card p-6 border-t-4 border-red-500">
+                        <div class="flex items-center mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /></svg>
+                            <h3 class="text-lg font-bold text-slate-800">Air Bubbles (Anaerobic Sample)</h3>
+                        </div>
+                        <p class="text-sm text-slate-600">Exposure to room air (high pO₂, low pCO₂) will cause O₂ to diffuse in and CO₂ to diffuse out. Expel all bubbles immediately.</p>
+                        <p class="mt-2 text-sm font-semibold text-red-600">Result: Falsely low pCO₂, high pH, high pO₂.</p>
+                    </div>
+                    <div class="card p-6 border-t-4 border-amber-500">
+                        <div class="flex items-center mb-3">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <h3 class="text-lg font-bold text-slate-800">Delay in Analysis</h3>
+                        </div>
+                        <p class="text-sm text-slate-600">Ongoing cellular metabolism consumes O₂ and produces CO₂/acids. Analyse immediately or transport on ice if delayed.</p>
+                        <p class="mt-2 text-sm font-semibold text-amber-600">Result: Falsely low pO₂, high pCO₂, low pH.</p>
+                    </div>
+                    <div class="card p-6 border-t-4 border-blue-500">
+                        <div class="flex items-center mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" /></svg>
+                            <h3 class="text-lg font-bold text-slate-800">Haemolysis</h3>
+                        </div>
+                        <p class="text-sm text-slate-600">Rupture of red blood cells (e.g., from vigorous shaking or difficult draw) releases intracellular components.</p>
+                        <p class="mt-2 text-sm font-semibold text-blue-600">Result: Falsely high K⁺ (most common), but also affects AST, ALT, LDH.</p>
+                    </div>
+                    <div class="card p-6 border-t-4 border-purple-500">
+                        <div class="flex items-center mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+                            <h3 class="text-lg font-bold text-slate-800">Excess Heparin (Dilution)</h3>
+                        </div>
+                        <p class="text-sm text-slate-600">Using too much liquid heparin, or not filling the syringe to the correct volume, dilutes the entire sample.</p>
+                        <p class="mt-2 text-sm font-semibold text-purple-600">Result: Falsely low values for all measured parameters (pCO₂, electrolytes, Hb).</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Main Content: Deep Dive -->
+    <div id="deep-dive-content" class="hidden">
+        <main class="container mx-auto px-6 py-12 md:py-16">
+            <section id="deep-dive-section" class="fade-in-up">
+                <div class="text-center mb-12">
+                    <h2 class="section-title">Deep Dive: Advanced Interpretation</h2>
+                    <p class="section-subtitle mt-4 max-w-3xl mx-auto">
+                        A systematic approach to unraveling complex acid-base disorders at the bedside.
+                    </p>
+                </div>
+
+                <!-- 5-Step Approach -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-6 text-center">A Systematic 5-Step Approach to ABG Interpretation</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                        <div class="card p-4 text-center">
+                            <div class="mx-auto bg-slate-100 rounded-full h-16 w-16 flex items-center justify-center text-2xl font-black text-slate-500 mb-3">1</div>
+                            <h4 class="font-bold">Check the pH</h4>
+                            <p class="text-sm">Acidaemia (&lt;7.35), Alkalaemia (&gt;7.45), or Normal?</p>
+                        </div>
+                        <div class="card p-4 text-center">
+                            <div class="mx-auto bg-slate-100 rounded-full h-16 w-16 flex items-center justify-center text-2xl font-black text-slate-500 mb-3">2</div>
+                            <h4 class="font-bold">Primary Disorder?</h4>
+                            <p class="text-sm">Is the pCO₂ or HCO₃⁻ consistent with the pH change?</p>
+                        </div>
+                        <div class="card p-4 text-center">
+                           <div class="mx-auto bg-slate-100 rounded-full h-16 w-16 flex items-center justify-center text-2xl font-black text-slate-500 mb-3">3</div>
+                            <h4 class="font-bold">Is there compensation?</h4>
+                            <p class="text-sm">Has the other system responded appropriately? Use formulae.</p>
+                        </div>
+                        <div class="card p-4 text-center">
+                            <div class="mx-auto bg-slate-100 rounded-full h-16 w-16 flex items-center justify-center text-2xl font-black text-slate-500 mb-3">4</div>
+                            <h4 class="font-bold">Calculate Anion Gap</h4>
+                            <p class="text-sm">If metabolic acidosis is present, is there a gap? Na⁺ - (Cl⁻ + HCO₃⁻)</p>
+                        </div>
+                        <div class="card p-4 text-center">
+                             <div class="mx-auto bg-slate-100 rounded-full h-16 w-16 flex items-center justify-center text-2xl font-black text-slate-500 mb-3">5</div>
+                            <h4 class="font-bold">Check "The Extras"</h4>
+                            <p class="text-sm">Assess pO₂, Lactate, Glucose, K⁺, and Co-oximetry.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Anion Gap & Key Formulae -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    <div class="card p-8">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4">The Anion Gap (AG)</h3>
+                        <p class="text-slate-600 mb-4">Essential for evaluating metabolic acidosis. It represents the unmeasured anions in the plasma.</p>
+                        <div class="mb-4 text-center p-4 bg-slate-100 rounded-lg font-mono text-slate-800">
+                           AG = [Na⁺] - ([Cl⁻] + [HCO₃⁻])
+                        </div>
+                        <p class="text-slate-600 mb-4">A normal AG is typically <strong>8-12 mmol/L</strong>. A high AG indicates the presence of an unmeasured acid.</p>
+                        <h4 class="font-bold text-slate-700 mb-2">High Anion Gap Metabolic Acidosis (HAGMA) Causes: GOLDMARK</h4>
+                        <ul class="list-disc list-inside text-slate-600 text-sm space-y-1">
+                            <li><strong>G</strong>lycols (ethylene, propylene)</li>
+                            <li><strong>O</strong>xoproline (paracetamol toxicity)</li>
+                            <li><strong>L</strong>-Lactate (sepsis, shock, metformin)</li>
+                            <li><strong>D</strong>-Lactate (rare, gut malabsorption)</li>
+                            <li><strong>M</strong>ethanol</li>
+                            <li><strong>A</strong>spirin (salicylates)</li>
+                            <li><strong>R</strong>enal Failure (uraemia)</li>
+                            <li><strong>K</strong>etoacidosis (diabetic, alcoholic, starvation)</li>
+                        </ul>
+                    </div>
+                    <div class="card p-8">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4">Key Clinical Formulae</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-bold text-slate-700">Winter's Formula (Metabolic Acidosis)</h4>
+                                <p class="text-sm text-slate-600 mb-2">Predicts the expected respiratory compensation. If the measured pCO₂ is higher than expected, there is a concurrent respiratory acidosis.</p>
+                                <div class="p-3 bg-slate-100 rounded-lg font-mono text-slate-800 text-sm">Expected pCO₂ (kPa) ≈ (0.2 × [HCO₃⁻]) + 1.1</div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-700">Delta Gap (HAGMA)</h4>
+                                <p class="text-sm text-slate-600 mb-2">Assesses for a concurrent metabolic disorder in HAGMA. A ratio of ~1-2 is expected.</p>
+                                <div class="p-3 bg-slate-100 rounded-lg font-mono text-slate-800 text-sm">ΔAG / ΔHCO₃⁻ = (AG - 12) / (24 - [HCO₃⁻])</div>
+                            </div>
+                             <div>
+                                <h4 class="font-bold text-slate-700">Arterial vs Venous Gas</h4>
+                                <p class="text-sm text-slate-600">A VBG is often sufficient for pH and pCO₂. Do not rely on it for pO₂.</p>
+                                <ul class="text-sm text-slate-600 list-inside list-disc">
+                                    <li>Venous pH is ~0.03-0.05 lower.</li>
+                                    <li>Venous pCO₂ is ~0.8-1.0 kPa higher.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-slate-800 text-slate-400 mt-20">
@@ -448,19 +559,17 @@
     </div>
 
     <script>
-        // Function to open a modal
+        // Modal Functions
         function openModal(modalId) {
             document.getElementById(modalId).style.display = "block";
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            document.body.style.overflow = 'hidden';
         }
 
-        // Function to close a modal
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = "none";
             document.body.style.overflow = 'auto';
         }
 
-        // Close modal if user clicks outside of the modal content
         window.onclick = function(event) {
             const modals = document.getElementsByClassName('modal');
             for (let i = 0; i < modals.length; i++) {
@@ -484,6 +593,26 @@
 
         const elements = document.querySelectorAll('.fade-in-up');
         elements.forEach(el => observer.observe(el));
+        
+        // Tab switching logic
+        const infoTab = document.getElementById('infographic-tab');
+        const deepDiveTab = document.getElementById('deep-dive-tab');
+        const infoContent = document.getElementById('infographic-content');
+        const deepDiveContent = document.getElementById('deep-dive-content');
+
+        infoTab.addEventListener('click', () => {
+            infoContent.style.display = 'block';
+            deepDiveContent.style.display = 'none';
+            infoTab.classList.add('active-tab');
+            deepDiveTab.classList.remove('active-tab');
+        });
+
+        deepDiveTab.addEventListener('click', () => {
+            infoContent.style.display = 'none';
+            deepDiveContent.style.display = 'block';
+            deepDiveTab.classList.add('active-tab');
+            infoTab.classList.remove('active-tab');
+        });
 
     </script>
 
